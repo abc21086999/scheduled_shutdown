@@ -3,7 +3,7 @@ import random
 
 
 def run_shutdown(time: int):
-    subprocess.run(["shutdown", "/s", "/t", time], shell=True)
+    subprocess.run(f'shutdown /s /t {time}', shell=True)
     print(f'{time}秒')
 
 

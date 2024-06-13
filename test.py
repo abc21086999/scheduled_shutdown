@@ -28,7 +28,7 @@ def cancel_shutdown():
 
 window = tk.Tk()
 window.title('定時關機程式')
-window.geometry('300x300')
+window.geometry('350x200')
 window.iconbitmap("C:\Program Files\Gamania\MapleStory\MapleStory.ico")
 window.resizable(False, False)
 

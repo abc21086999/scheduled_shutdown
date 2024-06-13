@@ -5,3 +5,4 @@ window.geometry('380x400')
 window.iconbitmap("C:\Program Files\Gamania\MapleStory\MapleStory.ico")
 window.resizable(False, False)
 window.mainloop()
+# Test

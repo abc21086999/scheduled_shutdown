@@ -76,6 +76,6 @@ class ShutdownManager(QObject):
             try:
                 hour_val = float(string)
                 integer, decimal = divmod(hour_val, 1)
-                return int(integer), int(decimal * 60)
+                return int(integer), int(round(decimal * 60))
             except ValueError:
                 return None, None

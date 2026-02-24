@@ -13,7 +13,7 @@ class MainWindow(QMainWindow):
         
         # Window setup
         self.setWindowTitle("定時關機程式")
-        self.setFixedSize(400, 300)
+        self.setMinimumSize(400, 300)
         
         # Central Widget & Main Layout
         central_widget = QWidget()

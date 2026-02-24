@@ -12,7 +12,7 @@ class MainWindow(QMainWindow):
         self.manager = manager
         
         # Window setup
-        self.setWindowTitle("定時關機程式 (PySide6)")
+        self.setWindowTitle("定時關機程式")
         self.setFixedSize(400, 300)
         
         # Central Widget & Main Layout
@@ -31,7 +31,8 @@ class MainWindow(QMainWindow):
         
         self.info_label = QLabel("")
         self.info_label.setAlignment(Qt.AlignCenter)
-        self.info_label.setStyleSheet("color: red;")
+        init_red = "#EF9A9A" if self.is_dark_mode() else "#D32F2F"
+        self.info_label.setStyleSheet(f"color: {init_red};")
         main_layout.addWidget(self.info_label)
 
         # --- Section 2: Input Area ---
@@ -75,7 +76,9 @@ class MainWindow(QMainWindow):
         # --- Section 4: Cancel Button ---
         cancel_button = QPushButton("取消關機")
         cancel_button.setCursor(Qt.PointingHandCursor)
-        cancel_button.setStyleSheet("background-color: #ffcccc; color: #cc0000; font-weight: bold;")
+        cancel_bg = "rgba(239, 154, 154, 0.2)" if self.is_dark_mode() else "#ffcccc"
+        cancel_fg = "#EF9A9A" if self.is_dark_mode() else "#cc0000"
+        cancel_button.setStyleSheet(f"background-color: {cancel_bg}; color: {cancel_fg}; font-weight: bold;")
         cancel_button.clicked.connect(self.manager.cancel_shutdown)
         main_layout.addWidget(cancel_button)
 
@@ -91,20 +94,26 @@ class MainWindow(QMainWindow):
         text = self.time_input.text()
         self.manager.schedule_shutdown(text)
 
+    def is_dark_mode(self) -> bool:
+        bg = self.palette().color(self.palette().ColorRole.Window)
+        return bg.lightness() < 128
+
     # --- Slots ---
     def update_status_scheduled(self, target_time: datetime):
         time_str = target_time.strftime("%H:%M:%S")
         self.status_label.setText(f"預計關機時間：{time_str}")
-        self.status_label.setStyleSheet("color: black;")
+        self.status_label.setStyleSheet("")  # 跟隨系統，不強制設色
         self.info_label.setText(f"將於 {time_str} 執行關機")
-        self.info_label.setStyleSheet("color: green;")
+        green = "#66BB6A" if self.is_dark_mode() else "#2E7D32"  # 淺綠 vs 深綠
+        self.info_label.setStyleSheet(f"color: {green};")
 
     def update_status_cancelled(self):
         self.status_label.setText("預計關機時間：--:--:--")
-        self.status_label.setStyleSheet("color: grey;")
         self.info_label.setText("已取消關機")
-        self.info_label.setStyleSheet("color: blue;")
+        blue = "#4FC3F7" if self.is_dark_mode() else "#0277BD"  # 亮水藍 vs 深藍
+        self.info_label.setStyleSheet(f"color: {blue};")
 
     def show_error(self, message: str):
         self.info_label.setText(message)
-        self.info_label.setStyleSheet("color: red;")
+        red = "#EF9A9A" if self.is_dark_mode() else "#D32F2F"  # 淺紅 vs 深紅
+        self.info_label.setStyleSheet(f"color: {red};")

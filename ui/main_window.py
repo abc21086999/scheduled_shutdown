@@ -23,9 +23,11 @@ class MainWindow(QMainWindow):
         main_layout.setContentsMargins(30, 30, 30, 30)
 
         # --- Section 1: Status Display ---
-        self.status_label = QLabel("預計關機時間：--:--:--")
+        self.status_label = QLabel("預計關機時間：")
         self.status_label.setAlignment(Qt.AlignCenter)
-        font = QFont("Arial", 18, QFont.Bold)
+        font = QFont()
+        font.setPointSize(18)
+        font.setBold(True)
         self.status_label.setFont(font)
         main_layout.addWidget(self.status_label)
         
@@ -108,7 +110,7 @@ class MainWindow(QMainWindow):
         self.info_label.setStyleSheet(f"color: {green};")
 
     def update_status_cancelled(self):
-        self.status_label.setText("預計關機時間：--:--:--")
+        self.status_label.setText("預計關機時間：")
         self.info_label.setText("已取消關機")
         blue = "#4FC3F7" if self.is_dark_mode() else "#0277BD"  # 亮水藍 vs 深藍
         self.info_label.setStyleSheet(f"color: {blue};")

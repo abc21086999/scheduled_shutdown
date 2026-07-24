@@ -1,5 +1,7 @@
 # 定時關機程式 (Scheduled Shutdown)
 
+![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/abc21086999/scheduled_shutdown/total?color=blue)
+
 一個簡單、現代化的 Windows 定時關機工具。
 提供直覺的圖形化介面，讓您輕鬆設定電腦自動關機的時間。
 
